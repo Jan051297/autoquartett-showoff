@@ -8,6 +8,8 @@ namespace project
 {
     static class Program
     {
+        public static Game game = null;
+
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
@@ -16,7 +18,9 @@ namespace project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            game = new Game();
+            game.Run();
         }
     }
 }
