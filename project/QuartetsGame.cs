@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using Json;
+using Newtonsoft.Json;
 
 namespace project
 {
@@ -32,13 +32,12 @@ namespace project
             // Parse
             try
             {
-                var data = JsonParser.Deserialize(json);
-
+                dynamic data = JsonConvert.DeserializeObject(json);
                 // Game Info
-                /*
-                gameData.info = new QuartetsGameInfo();
-                gameData.info.name = data.info.name;
-                gameData.info.source = data.info.source;*/
+                
+                var info = new QuartetsGameInfo();
+                info.name = data.info.name;
+                info.source = data.info.source;
             }
             catch
             {
