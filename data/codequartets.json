@@ -5,14 +5,14 @@
 	},
 	
 	"properties": [
-		["Number"],
-		["Group"],
-		["Name"],
-		["Year", "integer", "bigger"],
-		["Popularity", "integer", "bigger"],
-		["Dialects", "integer", "bigger"],
-		["Nerdfactor", "binary_integer", "bigger"],
-		["HelloWorld.Length", "integer", "shorter"]
+		["Number", "integer"],
+		["Group", "string"],
+		["Name", "string"],
+		["Year", "integer", "higher"],
+		["Popularity", "integer", "higher"],
+		["Dialects", "integer", "higher"],
+		["Nerdfactor", "binary_integer", "higher"],
+		["HelloWorld.Length", "integer", "lower"]
 	],
 	
 	"data": [

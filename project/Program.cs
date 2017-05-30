@@ -16,9 +16,7 @@ namespace project
         [STAThread]
         static void Main()
         {
-            QuartetsGame game = new QuartetsGame();
-            if (!game.Load("../../../data/bahnhof.json"))
-                return;
+            
 
 
 
@@ -26,8 +24,8 @@ namespace project
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //game = new Game();
-            //game.Run();
+            game = new Game();
+            game.Run();
         }
     }
 }

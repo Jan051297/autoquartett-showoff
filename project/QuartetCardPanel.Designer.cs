@@ -89,6 +89,6 @@
 
         private System.Windows.Forms.Label labelCardName;
         private System.Windows.Forms.PictureBox cardImage;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
