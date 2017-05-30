@@ -17,7 +17,7 @@ namespace project
         static void Main()
         {
             QuartetsGame game = new QuartetsGame();
-            if (!game.Load("../../../../data/codequartets.json"))
+            if (!game.Load("../../../data/bahnhof.json"))
                 return;
 
 
