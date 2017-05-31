@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
 using Newtonsoft.Json;
+using System.Drawing;
 
 namespace project
 {
@@ -20,6 +21,7 @@ namespace project
         public QuartetsGame game;
         public int index;
         public string name;
+        public Image image;
         public object[] propertyValues;
 
         public QuartetsCard(QuartetsGame g)
@@ -27,6 +29,7 @@ namespace project
             game = g;
             name = "[QuartetsCard:Invalid]";
             index = -1;
+            image = null;
             propertyValues = null;
         }
 
@@ -48,6 +51,8 @@ namespace project
 
     public class QuartetsGame
     {
+        public static string BasePath = "../../../data/";
+
         public QuartetsGameInfo gameInfo;
         public QuartetsProperties.IProperty[] properties = null;
         public QuartetsCard[] cards = null;
@@ -59,11 +64,11 @@ namespace project
 
         public bool Load(string path)
         {
-            // Open File
+            // Open JSON File
             string json;
             try
             {
-                json = File.ReadAllText(path);
+                json = File.ReadAllText(BasePath + path + ".json");
             } catch {
                 throw new InvalidQuartetsJSON("Failed to open File " + path);
             }
@@ -136,6 +141,8 @@ namespace project
             {
                 var card = new QuartetsCard(this);
                 card.index = i;
+
+                // Properties
                 card.propertyValues = new object[properties.Length];
 
                 var card_props = data.cards[i];
@@ -143,6 +150,16 @@ namespace project
                     card.propertyValues[p] = card_props[p];
 
                 card.name = (string)card_props[card_name_index];
+
+                // Image
+                try
+                {
+                    card.image = Image.FromFile(BasePath + path + "/" + card.name + ".jpg");
+                } catch {
+                    // Thats not so bad, i guess..
+                }
+
+                // Store
                 cards[i] = card;
             }
 

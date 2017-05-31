@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace project
 {
-    class Game
+    class Controller
     {
-        MainWindow window = null;
+        public MainWindow window = null;
 
         public void Run()
         {
+            // Show Main Window
             window = new MainWindow();
             System.Windows.Forms.Application.Run(window);
         }

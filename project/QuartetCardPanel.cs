@@ -23,6 +23,7 @@ namespace project
         {
             card = c;
             labelCardName.Text = c.name;
+            cardImage.Image = c.image;
 
             // Clear Table
             tableProperties.Controls.Clear();
@@ -45,13 +46,16 @@ namespace project
         private void AddProperty(string a, object val)
         {
             // Steal Row Style from previous Row
-            RowStyle previousRow = tableProperties.RowStyles[tableProperties.RowCount - 1];
-            tableProperties.RowStyles.Add(new RowStyle(previousRow.SizeType, previousRow.Height));
-            tableProperties.RowCount++;
+            if (tableProperties.RowCount > 1)
+            {
+                RowStyle previousRow = tableProperties.RowStyles[tableProperties.RowCount - 1];
+                tableProperties.RowStyles.Add(new RowStyle(previousRow.SizeType, previousRow.Height));
+                tableProperties.RowCount++;
+            }
 
             // Add Labels to Row
-            tableProperties.Controls.Add(new Label() { Text = a });
-            tableProperties.Controls.Add(new Label() { Text = val.ToString() });
+            tableProperties.Controls.Add(new Label() { Text = a, TextAlign = ContentAlignment.MiddleLeft, Dock = DockStyle.Fill });
+            tableProperties.Controls.Add(new Label() { Text = val.ToString(), TextAlign = ContentAlignment.MiddleRight });
         }
     }
 }

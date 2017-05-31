@@ -8,7 +8,7 @@ namespace project
 {
     static class Program
     {
-        public static Game game = null;
+        public static Controller game = null;
 
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
@@ -16,15 +16,11 @@ namespace project
         [STAThread]
         static void Main()
         {
-            
-
-
-
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            game = new Game();
+            // Game
+            game = new Controller();
             game.Run();
         }
     }

@@ -41,46 +41,53 @@
             this.labelCardName.Location = new System.Drawing.Point(0, 0);
             this.labelCardName.MinimumSize = new System.Drawing.Size(0, 35);
             this.labelCardName.Name = "labelCardName";
-            this.labelCardName.Size = new System.Drawing.Size(198, 35);
+            this.labelCardName.Size = new System.Drawing.Size(250, 35);
             this.labelCardName.TabIndex = 0;
             this.labelCardName.Text = "Card Name";
             this.labelCardName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cardImage
             // 
+            this.cardImage.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.cardImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cardImage.Location = new System.Drawing.Point(0, 35);
+            this.cardImage.MinimumSize = new System.Drawing.Size(250, 100);
             this.cardImage.Name = "cardImage";
-            this.cardImage.Size = new System.Drawing.Size(198, 213);
+            this.cardImage.Size = new System.Drawing.Size(250, 315);
+            this.cardImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.cardImage.TabIndex = 1;
             this.cardImage.TabStop = false;
             // 
             // tableProperties
             // 
             this.tableProperties.AutoSize = true;
+            this.tableProperties.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableProperties.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableProperties.ColumnCount = 2;
-            this.tableProperties.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableProperties.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableProperties.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableProperties.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableProperties.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableProperties.Location = new System.Drawing.Point(0, 228);
+            this.tableProperties.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tableProperties.Location = new System.Drawing.Point(0, 328);
+            this.tableProperties.Margin = new System.Windows.Forms.Padding(0);
             this.tableProperties.Name = "tableProperties";
-            this.tableProperties.RowCount = 2;
-            this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableProperties.RowCount = 1;
             this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableProperties.Size = new System.Drawing.Size(198, 20);
+            this.tableProperties.Size = new System.Drawing.Size(250, 22);
             this.tableProperties.TabIndex = 2;
             // 
             // QuartetCardPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.tableProperties);
             this.Controls.Add(this.cardImage);
             this.Controls.Add(this.labelCardName);
             this.Name = "QuartetCardPanel";
-            this.Size = new System.Drawing.Size(198, 248);
+            this.Size = new System.Drawing.Size(250, 350);
             ((System.ComponentModel.ISupportInitialize)(this.cardImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

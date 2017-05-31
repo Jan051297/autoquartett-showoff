@@ -19,7 +19,7 @@ namespace project
             var panel = quartetCardPanel1;
 
             QuartetsGame game = new QuartetsGame();
-            if (!game.Load("../../../data/codequartets.json"))
+            if (!game.Load("codequartets"))
                 return;
 
             var card = game.cards[0];

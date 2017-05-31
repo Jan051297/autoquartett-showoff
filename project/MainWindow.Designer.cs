@@ -46,9 +46,11 @@
             // 
             // quartetCardPanel1
             // 
-            this.quartetCardPanel1.Location = new System.Drawing.Point(12, 43);
+            this.quartetCardPanel1.BackColor = System.Drawing.Color.White;
+            this.quartetCardPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.quartetCardPanel1.Location = new System.Drawing.Point(57, 14);
             this.quartetCardPanel1.Name = "quartetCardPanel1";
-            this.quartetCardPanel1.Size = new System.Drawing.Size(200, 250);
+            this.quartetCardPanel1.Size = new System.Drawing.Size(250, 350);
             this.quartetCardPanel1.TabIndex = 1;
             // 
             // MainWindow
