@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace project.QuartetsProperties
 {
-    class StringProperty : IProperty
+    public class StringProperty : IProperty
     {
         string propertyName;
 

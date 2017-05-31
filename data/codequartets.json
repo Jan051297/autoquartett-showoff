@@ -7,15 +7,15 @@
 	"properties": [
 		["Number", "integer"],
 		["Group", "string"],
-		["Name", "string"],
+		["Name", "name"],
 		["Year", "integer", "higher"],
 		["Popularity", "integer", "higher"],
 		["Dialects", "integer", "higher"],
-		["Nerdfactor", "binary_integer", "higher"],
+		["Nerdfactor", "integer", "higher"],
 		["HelloWorld.Length", "integer", "lower"]
 	],
 	
-	"data": [
+	"cards": [
 	  [
 		19,
 		"G1",

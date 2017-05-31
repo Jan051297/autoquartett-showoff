@@ -71,4 +71,3 @@
         private QuartetCardPanel quartetCardPanel1;
     }
 }
-

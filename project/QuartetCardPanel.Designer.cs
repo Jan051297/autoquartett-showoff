@@ -30,7 +30,7 @@
         {
             this.labelCardName = new System.Windows.Forms.Label();
             this.cardImage = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableProperties = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,7 +41,7 @@
             this.labelCardName.Location = new System.Drawing.Point(0, 0);
             this.labelCardName.MinimumSize = new System.Drawing.Size(0, 35);
             this.labelCardName.Name = "labelCardName";
-            this.labelCardName.Size = new System.Drawing.Size(200, 35);
+            this.labelCardName.Size = new System.Drawing.Size(198, 35);
             this.labelCardName.TabIndex = 0;
             this.labelCardName.Text = "Card Name";
             this.labelCardName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -51,37 +51,39 @@
             this.cardImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cardImage.Location = new System.Drawing.Point(0, 35);
             this.cardImage.Name = "cardImage";
-            this.cardImage.Size = new System.Drawing.Size(200, 215);
+            this.cardImage.Size = new System.Drawing.Size(198, 213);
             this.cardImage.TabIndex = 1;
             this.cardImage.TabStop = false;
             // 
-            // tableLayoutPanel1
+            // tableProperties
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 150);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 100);
-            this.tableLayoutPanel1.TabIndex = 2;
+            this.tableProperties.AutoSize = true;
+            this.tableProperties.ColumnCount = 2;
+            this.tableProperties.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableProperties.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableProperties.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableProperties.Location = new System.Drawing.Point(0, 228);
+            this.tableProperties.Name = "tableProperties";
+            this.tableProperties.RowCount = 2;
+            this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableProperties.Size = new System.Drawing.Size(198, 20);
+            this.tableProperties.TabIndex = 2;
             // 
-            // QuartetCard
+            // QuartetCardPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.tableProperties);
             this.Controls.Add(this.cardImage);
             this.Controls.Add(this.labelCardName);
-            this.Name = "QuartetCard";
-            this.Size = new System.Drawing.Size(200, 250);
+            this.Name = "QuartetCardPanel";
+            this.Size = new System.Drawing.Size(198, 248);
             ((System.ComponentModel.ISupportInitialize)(this.cardImage)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -89,6 +91,6 @@
 
         private System.Windows.Forms.Label labelCardName;
         private System.Windows.Forms.PictureBox cardImage;
-        public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        public System.Windows.Forms.TableLayoutPanel tableProperties;
     }
 }

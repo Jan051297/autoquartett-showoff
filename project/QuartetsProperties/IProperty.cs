@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace project.QuartetsProperties
 {
-    enum PropertyResult
+    public enum PropertyResult
     {
         Invalid,
         Disabled,
@@ -16,7 +16,7 @@ namespace project.QuartetsProperties
         Higher
     }
 
-    abstract class IProperty
+    public abstract class IProperty
     {
         public abstract string GetName();
 

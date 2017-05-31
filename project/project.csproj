@@ -82,6 +82,7 @@
     <Compile Include="QuartetsGame.cs" />
     <Compile Include="QuartetsProperties\IntegerProperty.cs" />
     <Compile Include="QuartetsProperties\IProperty.cs" />
+    <Compile Include="QuartetsProperties\NameProperty.cs" />
     <Compile Include="QuartetsProperties\StringProperty.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
