@@ -14,6 +14,7 @@ namespace project
     {
         public string name;
         public string source;
+        public int amountCards;
     }
 
     public struct QuartetsCard
@@ -56,6 +57,42 @@ namespace project
         public QuartetsGameInfo gameInfo;
         public QuartetsProperties.IProperty[] properties = null;
         public QuartetsCard[] cards = null;
+
+        static public QuartetsGameInfo[] DiscoverGames()
+        {
+            // Find .json
+            var files = Directory.GetFiles(BasePath, "*.json", SearchOption.TopDirectoryOnly);
+            QuartetsGameInfo[] games = new QuartetsGameInfo[files.Length];
+
+            // Parse
+            for(int index = 0; index < games.Length; index++)
+            {
+                string path = files[index];
+                string name = path.ToLower().Remove(0, BasePath.Length).Replace(".json", "");
+
+                // Game Info
+                QuartetsGameInfo info;
+                info.name = name;
+                info.source = "?";
+                info.amountCards = 0;
+
+                // Parse
+                try
+                {
+                    dynamic data = JsonConvert.DeserializeObject(File.ReadAllText(path));
+                    info.name = data.info.name;
+                    info.source = data.info.source;
+                    info.amountCards = data.cards.Count;
+                } catch {
+                    info.name += "[Invalid]";
+                    info.source = "Error loading JSON!";
+                }
+
+                games[index] = info;
+            }
+
+            return games;
+        }
 
         public QuartetsGame()
         {
@@ -137,6 +174,8 @@ namespace project
 
             // Cards
             cards = new QuartetsCard[data.cards.Count];
+            gameInfo.amountCards = cards.Length;
+
             for(int i = 0; i < cards.Length; i++)
             {
                 var card = new QuartetsCard(this);

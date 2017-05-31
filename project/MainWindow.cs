@@ -12,18 +12,35 @@ namespace project
 {
     public partial class MainWindow : Form
     {
+        private QuartetsGameInfo[] games = null;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            var panel = quartetCardPanel1;
+            // List available Games
+            games = QuartetsGame.DiscoverGames();
+            foreach(QuartetsGameInfo game in games)
+            {
+                listGames.Items.Add(game.name);
+            }
+        }
 
-            QuartetsGame game = new QuartetsGame();
-            if (!game.Load("codequartets"))
+        private void OnSelectGame(object sender, EventArgs e)
+        {
+            QuartetsGameInfo game = games[listGames.SelectedIndex];
+            buttonLoad.Enabled = game.amountCards > 0;
+
+            // Invalid
+            if (!buttonLoad.Enabled)
+            {
+                labelGameInfo.Text = "Unable to parse JSON!\nCould not load Quartet!";
                 return;
+            }
 
-            var card = game.cards[0];
-            panel.SetCard(card);
+            // Info
+            labelGameInfo.Text = "Source: " + game.source + "\n";
+            labelGameInfo.Text += "Cards: " + game.amountCards;
         }
     }
 }
