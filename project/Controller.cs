@@ -23,6 +23,11 @@ namespace project
             mainWindow = new MainWindow();
             System.Windows.Forms.Application.Run(mainWindow);
 
+            // Check if a game has been loaded
+            // If not, close
+            if (gameData == null)
+                return;
+
             // Show Game Window
             System.Windows.Forms.Application.Run(new GameWindow());
         }

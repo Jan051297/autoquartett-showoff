@@ -26,6 +26,9 @@ namespace project
             InitializeComponent();
         }
 
+        // UpdateCardLabelFontSize changes the Font Size of labelCardName to fit
+        // the actual text. This makes sure the Card name actually fits into the
+        // label
         private bool UpdateCardLabelFontSize()
         {
             Font currentFont = labelCardName.Font;
@@ -38,12 +41,14 @@ namespace project
             return true;
         }
 
+        // SetCardTitle changes the Title and fits the Label
         public void SetCardTitle(string str)
         {
             labelCardName.Text = str;
             UpdateCardLabelFontSize();
         }
 
+        // SetCard resets everything and shows the given Card
         public void SetCard(QuartetsCard c)
         {
             card = c;
@@ -52,7 +57,14 @@ namespace project
 
             // Clear Table
             tableProperties.Controls.Clear();
-            rowcount = 0;
+            tableProperties.RowCount = 0;
+
+            // Clear Row Styles, keep only original one
+            {
+                var originalStyle = tableProperties.RowStyles[0];
+                tableProperties.RowStyles.Clear();
+                tableProperties.RowStyles.Add(originalStyle);
+            }
 
             // Properties
             for (int i = 0; i < card.propertyValues.Length; i++)
@@ -73,44 +85,46 @@ namespace project
             return card;
         }
 
-        private int rowcount = 0;
+        // AddProperty adds a Card property to the Table
         private void AddProperty(string a, object val)
         {
             // Steal Row Style from previous Row
-            if (tableProperties.RowCount > 99999)
-            {
-                RowStyle previousRow = tableProperties.RowStyles[tableProperties.RowCount - 1];
-                tableProperties.RowStyles.Add(new RowStyle(previousRow.SizeType, previousRow.Height));
-                tableProperties.RowCount++;
-            }
+            RowStyle previousRow = tableProperties.RowStyles[tableProperties.RowCount];
+            tableProperties.RowStyles.Add(new RowStyle(previousRow.SizeType, previousRow.Height));
 
             // Add Labels to Row
-            
-            tableProperties.Controls.Add(new Label() { Text = a, TextAlign = ContentAlignment.MiddleLeft, Dock = DockStyle.Fill }, 0, rowcount);
-            tableProperties.Controls.Add(new Label() { Text = val.ToString(), TextAlign = ContentAlignment.MiddleRight }, 1, rowcount);
+            tableProperties.Controls.Add(new Label() { Text = a, TextAlign = ContentAlignment.MiddleLeft, Dock = DockStyle.Fill }, 0, tableProperties.RowCount);
+            tableProperties.Controls.Add(new Label() { Text = val.ToString(), TextAlign = ContentAlignment.MiddleRight }, 1, tableProperties.RowCount);
 
-            rowcount++;
+            // Increment Row Count
+            tableProperties.RowCount++;
         }
 
+        // UpdatePropertyColor changes the Label color (both type + value) of a property
         public void UpdatePropertyColor(int propertyIndex, Color color)
         {
             if (propertyIndex < 0 || propertyIndex > card.propertyValues.Length)
                 return;
 
+            // Controls
             var labelPropertyName = tableProperties.GetControlFromPosition(0, propertyIndex);
             var labelPropertyValue = tableProperties.GetControlFromPosition(1, propertyIndex);
 
+            // This should not happen
             if (labelPropertyName == null || labelPropertyValue == null)
                 return;
 
+            // Update Color
             labelPropertyName.ForeColor = color;
             labelPropertyValue.ForeColor = color;
         }
 
+        // Similar to UpdatePropertyColor, Color is determined based on PropertyResult
         public void UpdatePropertyColor(int propertyIndex, QuartetsProperties.PropertyResult result)
         {
             Color color = Color.Black;
 
+            // Color fitting PropertyResult
             switch(result)
             {
                 case QuartetsProperties.PropertyResult.Equal:
@@ -124,9 +138,11 @@ namespace project
                     break;
             }
 
+            // Update
             UpdatePropertyColor(propertyIndex, color);
         }
 
+        // SetupContextMenu creates a Context Menu for the Panel
         public void SetupContextMenu(QuartetCardPanelContextMenu settings)
         {
             contextMenuSettings = settings;
@@ -136,14 +152,14 @@ namespace project
             for (int index = 0; index < items.Length; index++)
             {
                 items[index] = new MenuItem(settings.options[index]);
-                items[index].Click += QuartetCardPanel_Click;
+                items[index].Click += this.OnContextMenuItemClick;
             }
             
             // Setup Context Menu
             ContextMenu = new ContextMenu(items);
         }
 
-        private void QuartetCardPanel_Click(object sender, EventArgs e)
+        private void OnContextMenuItemClick(object sender, EventArgs e)
         {
             var menuItem = sender as MenuItem;
             contextMenuSettings.eventHandler(card, menuItem.Text);
