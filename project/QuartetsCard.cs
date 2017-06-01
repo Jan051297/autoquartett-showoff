@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace project
 {
-    public struct QuartetsCard
+    public class QuartetsCard
     {
         public QuartetsGame game;
         public int index;

@@ -56,7 +56,7 @@ namespace project
                 if (Program.controller.LoadGame(game.filename))
                     this.Close();
             } catch(Exception err) {
-                MessageBox.Show(err.Message, "Failed to Load!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(err.Message,"Failed to Load!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

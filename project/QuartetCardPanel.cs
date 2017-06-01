@@ -19,6 +19,7 @@ namespace project
     public partial class QuartetCardPanel : UserControl
     {
         private QuartetsCard card;
+        private QuartetCardPanelContextMenu contextMenuSettings;
 
         public QuartetCardPanel()
         {
@@ -67,10 +68,16 @@ namespace project
             }
         }
 
+        public QuartetsCard GetCard()
+        {
+            return card;
+        }
+
+        private int rowcount = 0;
         private void AddProperty(string a, object val)
         {
             // Steal Row Style from previous Row
-            if (tableProperties.RowCount > 1)
+            if (tableProperties.RowCount > 99999)
             {
                 RowStyle previousRow = tableProperties.RowStyles[tableProperties.RowCount - 1];
                 tableProperties.RowStyles.Add(new RowStyle(previousRow.SizeType, previousRow.Height));
@@ -78,11 +85,45 @@ namespace project
             }
 
             // Add Labels to Row
-            tableProperties.Controls.Add(new Label() { Text = a, TextAlign = ContentAlignment.MiddleLeft, Dock = DockStyle.Fill });
-            tableProperties.Controls.Add(new Label() { Text = val.ToString(), TextAlign = ContentAlignment.MiddleRight });
+            
+            tableProperties.Controls.Add(new Label() { Text = a, TextAlign = ContentAlignment.MiddleLeft, Dock = DockStyle.Fill }, 0, rowcount);
+            tableProperties.Controls.Add(new Label() { Text = val.ToString(), TextAlign = ContentAlignment.MiddleRight }, 1, rowcount);
+
+            rowcount++;
         }
 
-        private QuartetCardPanelContextMenu contextMenuSettings;
+        public void UpdatePropertyColor(int propertyIndex, Color color)
+        {
+            if (propertyIndex < 0 || propertyIndex > card.propertyValues.Length)
+                return;
+
+            var labelPropertyName = tableProperties.GetControlFromPosition(0, propertyIndex);
+            var labelPropertyValue = tableProperties.GetControlFromPosition(1, propertyIndex);
+
+            labelPropertyName.ForeColor = color;
+            labelPropertyValue.ForeColor = color;
+        }
+
+        public void UpdatePropertyColor(int propertyIndex, QuartetsProperties.PropertyResult result)
+        {
+            Color color = Color.Black;
+
+            switch(result)
+            {
+                case QuartetsProperties.PropertyResult.Equal:
+                    color = Color.Orange;
+                    break;
+                case QuartetsProperties.PropertyResult.Higher:
+                    color = Color.Green;
+                    break;
+                case QuartetsProperties.PropertyResult.Lower:
+                    color = Color.Red;
+                    break;
+            }
+
+            UpdatePropertyColor(propertyIndex, color);
+        }
+
         public void SetupContextMenu(QuartetCardPanelContextMenu settings)
         {
             contextMenuSettings = settings;

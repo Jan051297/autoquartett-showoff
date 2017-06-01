@@ -109,10 +109,10 @@ namespace project
             // Properties
             int card_name_index = -1; // Property Index of (required) Name attribute
 
-            properties = new QuartetsProperties.IProperty[data.properties.Count];
-            for (int i = 0; i < properties.Length; i++)
+            properties = new QuartetsProperties.IProperty[data.properties.Count - 1];
+            for (int pi = 0, i = 0; pi < data.properties.Count; pi++)
             {
-                var property = data.properties[i];
+                var property = data.properties[pi];
                 var property_name = (string)property[0];
                 var property_type = (string)property[1];
 
@@ -139,10 +139,12 @@ namespace project
                         properties[i] = new QuartetsProperties.StringProperty(property_name);
                         break;
                     case "name":
-                        properties[i] = new QuartetsProperties.NameProperty();
-                        card_name_index = i;
+                        //properties[i] = new QuartetsProperties.NameProperty();
+                        card_name_index = pi; i--;
                         break;
                 }
+
+                i++;
             }
 
             // Name
@@ -163,10 +165,17 @@ namespace project
                 card.propertyValues = new object[properties.Length];
 
                 var card_props = data.cards[i];
-                for (int p = 0; p < card_props.Count; p++)
-                    card.propertyValues[p] = card_props[p];
+                for (int p = 0, pi = 0; p < card_props.Count; p++)
+                {
+                    if(p == card_name_index)
+                    {
+                        card.name = (string)card_props[card_name_index];
+                        continue;
+                    }
 
-                card.name = (string)card_props[card_name_index];
+                    card.propertyValues[pi] = card_props[p].Value;
+                    pi++;
+                }
 
                 // Image
                 try

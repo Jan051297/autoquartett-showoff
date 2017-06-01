@@ -45,12 +45,39 @@ namespace project
             cardPanelLeft.SetCard(card);
         }
 
+        public void CompareCards()
+        {
+            // Check if cards have been selected
+            var cardLeft = cardPanelLeft.GetCard();
+            var cardRight = cardPanelRight.GetCard();
+
+            if (cardLeft == null || cardRight == null)
+                return;
+
+            // Compare properties
+            var props = Program.controller.game.properties;
+
+            for(int i = 0; i < props.Length; i++)
+            {
+                var prop = props[i];
+                var result = prop.Compare(cardLeft.propertyValues[i], cardRight.propertyValues[i]);
+                
+                if (result == QuartetsProperties.PropertyResult.Disabled ||
+                    result == QuartetsProperties.PropertyResult.Invalid)
+                    continue;
+
+                cardPanelLeft.UpdatePropertyColor(i, result);
+            }
+        }
+
         private void OnCardContextMenu(QuartetsCard card, string option)
         {
             if (option == "Left")
                 cardPanelLeft.SetCard(card);
             else if (option == "Right")
                 cardPanelRight.SetCard(card);
+
+            CompareCards();
         }
     }
 }

@@ -24,11 +24,11 @@ namespace project.QuartetsProperties
 
         public override PropertyResult Compare(object a, object b)
         {
-            if (a.GetType() != typeof(Int32) || b.GetType() != typeof(Int32))
-                return PropertyResult.Invalid;
+            /*if (a.GetType() != typeof(Int32) || b.GetType() != typeof(Int32))
+                return PropertyResult.Invalid;*/
 
-            int A = (int)a;
-            int B = (int)b;
+            long A = (long)a;
+            long B = (long)b;
 
             // Compare Integer
             if (A == B)

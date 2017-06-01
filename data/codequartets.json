@@ -10,7 +10,7 @@
 		["Name", "name"],
 		["Year", "integer", "higher"],
 		["Popularity", "integer", "higher"],
-		["Dialects", "integer", "higher"],
+		["Dialects", "string"],
 		["Nerdfactor", "integer", "higher"],
 		["HelloWorld.Length", "integer", "lower"]
 	],
