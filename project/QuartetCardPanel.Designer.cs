@@ -36,8 +36,9 @@
             // 
             // labelCardName
             // 
+            this.labelCardName.BackColor = System.Drawing.Color.Silver;
             this.labelCardName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelCardName.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCardName.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCardName.Location = new System.Drawing.Point(0, 0);
             this.labelCardName.MinimumSize = new System.Drawing.Size(0, 35);
             this.labelCardName.Name = "labelCardName";
@@ -48,9 +49,10 @@
             // 
             // cardImage
             // 
-            this.cardImage.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.cardImage.BackColor = System.Drawing.Color.White;
             this.cardImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cardImage.Location = new System.Drawing.Point(0, 35);
+            this.cardImage.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.cardImage.MinimumSize = new System.Drawing.Size(250, 100);
             this.cardImage.Name = "cardImage";
             this.cardImage.Size = new System.Drawing.Size(250, 315);
@@ -62,19 +64,18 @@
             // 
             this.tableProperties.AutoSize = true;
             this.tableProperties.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableProperties.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableProperties.ColumnCount = 2;
             this.tableProperties.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableProperties.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableProperties.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableProperties.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableProperties.Location = new System.Drawing.Point(0, 328);
-            this.tableProperties.Margin = new System.Windows.Forms.Padding(0);
+            this.tableProperties.Location = new System.Drawing.Point(0, 329);
+            this.tableProperties.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.tableProperties.Name = "tableProperties";
             this.tableProperties.RowCount = 1;
-            this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableProperties.Size = new System.Drawing.Size(250, 22);
+            this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableProperties.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableProperties.Size = new System.Drawing.Size(250, 21);
             this.tableProperties.TabIndex = 2;
             // 
             // QuartetCardPanel

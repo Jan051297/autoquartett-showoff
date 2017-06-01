@@ -57,13 +57,13 @@
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Enabled = false;
             this.buttonLoad.Location = new System.Drawing.Point(197, 195);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(200, 29);
             this.buttonLoad.TabIndex = 2;
             this.buttonLoad.Text = "Load";
             this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.OnButtonLoadGame);
             // 
             // labelGameInfo
             // 

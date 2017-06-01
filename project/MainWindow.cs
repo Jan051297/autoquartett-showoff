@@ -28,11 +28,13 @@ namespace project
 
         private void OnSelectGame(object sender, EventArgs e)
         {
+            if (listGames.SelectedIndex < 0)
+                return;
+
             QuartetsGameInfo game = games[listGames.SelectedIndex];
-            buttonLoad.Enabled = game.amountCards > 0;
 
             // Invalid
-            if (!buttonLoad.Enabled)
+            if (game.amountCards <= 0)
             {
                 labelGameInfo.Text = "Unable to parse JSON!\nCould not load Quartet!";
                 return;
@@ -41,6 +43,21 @@ namespace project
             // Info
             labelGameInfo.Text = "Source: " + game.source + "\n";
             labelGameInfo.Text += "Cards: " + game.amountCards;
+        }
+
+        private void OnButtonLoadGame(object sender, EventArgs e)
+        {
+            if (listGames.SelectedIndex < 0)
+                return;
+
+            QuartetsGameInfo game = games[listGames.SelectedIndex];
+            try
+            {
+                if (Program.controller.LoadGame(game.filename))
+                    this.Close();
+            } catch(Exception err) {
+                MessageBox.Show(err.Message, "Failed to Load!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

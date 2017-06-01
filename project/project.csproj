@@ -65,6 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="GameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameWindow.Designer.cs">
+      <DependentUpon>GameWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,11 +85,15 @@
     <Compile Include="QuartetCardPanel.Designer.cs">
       <DependentUpon>QuartetCardPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuartetsCard.cs" />
     <Compile Include="QuartetsGame.cs" />
     <Compile Include="QuartetsProperties\IntegerProperty.cs" />
     <Compile Include="QuartetsProperties\IProperty.cs" />
     <Compile Include="QuartetsProperties\NameProperty.cs" />
     <Compile Include="QuartetsProperties\StringProperty.cs" />
+    <EmbeddedResource Include="GameWindow.resx">
+      <DependentUpon>GameWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

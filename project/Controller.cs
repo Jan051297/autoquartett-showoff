@@ -6,15 +6,29 @@ using System.Threading.Tasks;
 
 namespace project
 {
-    class Controller
+    public class Controller
     {
-        public MainWindow window = null;
+        public MainWindow mainWindow = null;
+        public QuartetsGame game;
+
+        public Controller()
+        {
+            game = new QuartetsGame();
+        }
 
         public void Run()
         {
             // Show Main Window
-            window = new MainWindow();
-            System.Windows.Forms.Application.Run(window);
+            mainWindow = new MainWindow();
+            System.Windows.Forms.Application.Run(mainWindow);
+
+            // Show Game Window
+            System.Windows.Forms.Application.Run(new GameWindow());
+        }
+
+        public bool LoadGame(string path)
+        {
+            return game.Load(path);
         }
     }
 }

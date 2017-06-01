@@ -8,7 +8,7 @@ namespace project
 {
     static class Program
     {
-        public static Controller game = null;
+        public static Controller controller = null;
 
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
@@ -19,9 +19,9 @@ namespace project
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Game
-            game = new Controller();
-            game.Run();
+            // Controller
+            controller = new Controller();
+            controller.Run();
         }
     }
 }

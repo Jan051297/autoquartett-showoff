@@ -10,6 +10,12 @@ using System.Windows.Forms;
 
 namespace project
 {
+    public struct QuartetCardPanelContextMenu
+    {
+        public string[] options;
+        public Action<QuartetsCard, string> eventHandler;
+    }
+
     public partial class QuartetCardPanel : UserControl
     {
         private QuartetsCard card;
@@ -19,10 +25,28 @@ namespace project
             InitializeComponent();
         }
 
+        private bool UpdateCardLabelFontSize()
+        {
+            Font currentFont = labelCardName.Font;
+            if(labelCardName.Width < TextRenderer.MeasureText(labelCardName.Text, currentFont).Width)
+            {
+                labelCardName.Font = new Font(currentFont.FontFamily, currentFont.Size - 0.5f, currentFont.Style);
+                return UpdateCardLabelFontSize();
+            }
+
+            return true;
+        }
+
+        public void SetCardTitle(string str)
+        {
+            labelCardName.Text = str;
+            UpdateCardLabelFontSize();
+        }
+
         public void SetCard(QuartetsCard c)
         {
             card = c;
-            labelCardName.Text = c.name;
+            SetCardTitle(c.name);
             cardImage.Image = c.image;
 
             // Clear Table
@@ -56,6 +80,29 @@ namespace project
             // Add Labels to Row
             tableProperties.Controls.Add(new Label() { Text = a, TextAlign = ContentAlignment.MiddleLeft, Dock = DockStyle.Fill });
             tableProperties.Controls.Add(new Label() { Text = val.ToString(), TextAlign = ContentAlignment.MiddleRight });
+        }
+
+        private QuartetCardPanelContextMenu contextMenuSettings;
+        public void SetupContextMenu(QuartetCardPanelContextMenu settings)
+        {
+            contextMenuSettings = settings;
+
+            // Menu Items
+            MenuItem[] items = new MenuItem[settings.options.Length];
+            for (int index = 0; index < items.Length; index++)
+            {
+                items[index] = new MenuItem(settings.options[index]);
+                items[index].Click += QuartetCardPanel_Click;
+            }
+            
+            // Setup Context Menu
+            ContextMenu = new ContextMenu(items);
+        }
+
+        private void QuartetCardPanel_Click(object sender, EventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            contextMenuSettings.eventHandler(card, menuItem.Text);
         }
     }
 }

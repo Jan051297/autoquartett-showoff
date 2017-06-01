@@ -12,40 +12,16 @@ namespace project
 {
     public struct QuartetsGameInfo
     {
+        public string filename;
         public string name;
         public string source;
         public int amountCards;
     }
 
-    public struct QuartetsCard
-    {
-        public QuartetsGame game;
-        public int index;
-        public string name;
-        public Image image;
-        public object[] propertyValues;
-
-        public QuartetsCard(QuartetsGame g)
-        {
-            game = g;
-            name = "[QuartetsCard:Invalid]";
-            index = -1;
-            image = null;
-            propertyValues = null;
-        }
-
-        public bool IsValid()
-        {
-            return game != null &&
-                index > -1 &&
-                propertyValues != null;
-        }
-    }
-
     public class InvalidQuartetsJSON : Exception
     {
         public InvalidQuartetsJSON(string error) : 
-            base("Invalid JSON: " + error)
+            base("Invalid Quartets JSON: " + error)
         {
         }
     }
@@ -72,7 +48,7 @@ namespace project
 
                 // Game Info
                 QuartetsGameInfo info;
-                info.name = name;
+                info.name = info.filename = name;
                 info.source = "?";
                 info.amountCards = 0;
 
@@ -101,6 +77,8 @@ namespace project
 
         public bool Load(string path)
         {
+            gameInfo.filename = path;
+
             // Open JSON File
             string json;
             try
