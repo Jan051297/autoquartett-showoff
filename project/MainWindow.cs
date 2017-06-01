@@ -18,12 +18,14 @@ namespace project
         {
             InitializeComponent();
 
-            // List available Games
-            games = QuartetsGame.DiscoverGames();
+            // Discover Games
+            QuartetsGameLoader gameLoader = Program.controller.gameLoader;
+            gameLoader.DiscoverGames();
+            games = gameLoader.GetDiscoveredGames();
+
+            // Add discovered Games to List
             foreach(QuartetsGameInfo game in games)
-            {
                 listGames.Items.Add(game.name);
-            }
         }
 
         private void OnSelectGame(object sender, EventArgs e)
@@ -53,10 +55,13 @@ namespace project
             QuartetsGameInfo game = games[listGames.SelectedIndex];
             try
             {
-                if (Program.controller.LoadGame(game.filename))
-                    this.Close();
+                Program.controller.LoadGame(game.filename);
+                this.Close();
             } catch(Exception err) {
-                MessageBox.Show(err.Message,"Failed to Load!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(err.Message,
+                    "Failed to Load!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
     }

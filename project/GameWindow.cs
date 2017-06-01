@@ -15,10 +15,10 @@ namespace project
         public GameWindow()
         {
             InitializeComponent();
-            var game = Program.controller.game;
+            var game = Program.controller.gameData;
 
             // Title
-            Text = game.gameInfo.name;
+            Text = game.info.name;
 
             // Cards (Bottom)
             cardPanelLeft.SetCardTitle("");
@@ -55,7 +55,7 @@ namespace project
                 return;
 
             // Compare properties
-            var props = Program.controller.game.properties;
+            var props = Program.controller.gameData.properties;
 
             for(int i = 0; i < props.Length; i++)
             {

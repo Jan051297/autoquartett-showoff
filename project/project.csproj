@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="QuartetsCard.cs" />
     <Compile Include="QuartetsGame.cs" />
+    <Compile Include="QuartetsGameLoader.cs" />
     <Compile Include="QuartetsProperties\IntegerProperty.cs" />
     <Compile Include="QuartetsProperties\IProperty.cs" />
     <Compile Include="QuartetsProperties\NameProperty.cs" />

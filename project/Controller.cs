@@ -9,11 +9,12 @@ namespace project
     public class Controller
     {
         public MainWindow mainWindow = null;
-        public QuartetsGame game;
+        public QuartetsGameData gameData;
+        public QuartetsGameLoader gameLoader;
 
         public Controller()
         {
-            game = new QuartetsGame();
+            gameLoader = new QuartetsGameLoader();
         }
 
         public void Run()
@@ -26,9 +27,9 @@ namespace project
             System.Windows.Forms.Application.Run(new GameWindow());
         }
 
-        public bool LoadGame(string path)
+        public void LoadGame(string path)
         {
-            return game.Load(path);
+            gameData = gameLoader.Load(path);
         }
     }
 }

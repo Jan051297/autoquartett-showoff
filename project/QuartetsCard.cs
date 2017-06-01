@@ -9,15 +9,15 @@ namespace project
 {
     public class QuartetsCard
     {
-        public QuartetsGame game;
+        public QuartetsGameData gameData;
         public int index;
         public string name;
         public Image image;
         public object[] propertyValues;
 
-        public QuartetsCard(QuartetsGame g)
+        public QuartetsCard()
         {
-            game = g;
+            gameData = null;
             name = "[QuartetsCard:Invalid]";
             index = -1;
             image = null;
@@ -26,7 +26,7 @@ namespace project
 
         public bool IsValid()
         {
-            return game != null &&
+            return gameData != null &&
                 index > -1 &&
                 propertyValues != null;
         }

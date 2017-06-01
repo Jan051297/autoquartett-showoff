@@ -52,12 +52,12 @@ namespace project
 
             // Clear Table
             tableProperties.Controls.Clear();
-            tableProperties.RowCount = 1;
+            rowcount = 0;
 
             // Properties
             for (int i = 0; i < card.propertyValues.Length; i++)
             {
-                var property = card.game.properties[i];
+                var property = card.gameData.properties[i];
 
                 // Hide Name Property
                 if (property.GetType() == typeof(QuartetsProperties.NameProperty))
@@ -99,6 +99,9 @@ namespace project
 
             var labelPropertyName = tableProperties.GetControlFromPosition(0, propertyIndex);
             var labelPropertyValue = tableProperties.GetControlFromPosition(1, propertyIndex);
+
+            if (labelPropertyName == null || labelPropertyValue == null)
+                return;
 
             labelPropertyName.ForeColor = color;
             labelPropertyValue.ForeColor = color;
