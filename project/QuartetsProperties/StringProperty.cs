@@ -20,6 +20,26 @@ namespace project.QuartetsProperties
             return propertyName;
         }
 
+        public override object CheckValueType(object obj)
+        {
+            try
+            {
+                return Convert.ToString(obj);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public override object ParseValueType(string str)
+        {
+            if (str == null || str.Length == 0)
+                return null;
+
+            return str;
+        }
+
         public override PropertyResult Compare(object a, object b)
         {
             return PropertyResult.Disabled;

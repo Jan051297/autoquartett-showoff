@@ -234,7 +234,13 @@ namespace project
                     if (dataIndex == namePropertyIndex)
                         continue;
 
-                    card.propertyValues[propertyIndex] = cardData[dataIndex];
+                    // Check/Convert Property Value
+                    var property = gameData.properties[propertyIndex];
+                    var value = property.CheckValueType(cardData[dataIndex]);
+
+                    card.propertyValues[propertyIndex] = value ??
+                        throw new InvalidQuartetsJSON("Card " + dataIndex + ": Invalid value type for property '" + property.GetName() + "': " + cardData[dataIndex].ToString());
+
                     propertyIndex++;
                 }
 

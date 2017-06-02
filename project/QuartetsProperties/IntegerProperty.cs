@@ -22,13 +22,33 @@ namespace project.QuartetsProperties
             return propertyName;
         }
 
+        public override object CheckValueType(object obj)
+        {
+            try
+            {
+                return Convert.ToInt32(obj);
+            } catch {
+                return null;
+            }
+        }
+
+        public override object ParseValueType(string str)
+        {
+            try
+            {
+                return Int32.Parse(str);
+            } catch {
+                return null;
+            }
+        }
+
         public override PropertyResult Compare(object a, object b)
         {
-            /*if (a.GetType() != typeof(Int32) || b.GetType() != typeof(Int32))
-                return PropertyResult.Invalid;*/
+            if (a.GetType() != typeof(Int32) || b.GetType() != typeof(Int32))
+                return PropertyResult.Invalid;
 
-            long A = (long)a;
-            long B = (long)b;
+            int A = (int)a;
+            int B = (int)b;
 
             // Compare Integer
             if (A == B)
