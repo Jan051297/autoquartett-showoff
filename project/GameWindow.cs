@@ -66,7 +66,8 @@ namespace project
                     result == QuartetsProperties.PropertyResult.Invalid)
                     continue;
 
-                cardPanelLeft.UpdatePropertyColor(i, result);
+                cardPanelLeft.UpdatePropertyColor(i, result, true);
+                cardPanelRight.UpdatePropertyColor(i, result, false);
             }
         }
 

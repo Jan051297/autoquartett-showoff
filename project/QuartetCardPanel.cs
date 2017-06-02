@@ -120,7 +120,7 @@ namespace project
         }
 
         // Similar to UpdatePropertyColor, Color is determined based on PropertyResult
-        public void UpdatePropertyColor(int propertyIndex, QuartetsProperties.PropertyResult result)
+        public void UpdatePropertyColor(int propertyIndex, QuartetsProperties.PropertyResult result, bool win)
         {
             Color color = Color.Black;
 
@@ -131,10 +131,10 @@ namespace project
                     color = Color.Orange;
                     break;
                 case QuartetsProperties.PropertyResult.Higher:
-                    color = Color.Green;
+                    color = win ? Color.Green : Color.Red;
                     break;
                 case QuartetsProperties.PropertyResult.Lower:
-                    color = Color.Red;
+                    color = win ? Color.Red : Color.Green;
                     break;
             }
 
