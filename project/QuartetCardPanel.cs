@@ -18,8 +18,9 @@ namespace project
 
     public partial class QuartetCardPanel : UserControl
     {
-        private QuartetsCard card;
+        private QuartetsCard card = null;
         private QuartetCardPanelContextMenu contextMenuSettings;
+        private Action<QuartetsCard, int> propertyCallback = null;
 
         public QuartetCardPanel()
         {
@@ -92,9 +93,28 @@ namespace project
             RowStyle previousRow = tableProperties.RowStyles[tableProperties.RowCount];
             tableProperties.RowStyles.Add(new RowStyle(previousRow.SizeType, previousRow.Height));
 
-            // Add Labels to Row
-            tableProperties.Controls.Add(new Label() { Text = a, TextAlign = ContentAlignment.MiddleLeft, Dock = DockStyle.Fill }, 0, tableProperties.RowCount);
-            tableProperties.Controls.Add(new Label() { Text = val.ToString(), TextAlign = ContentAlignment.MiddleRight }, 1, tableProperties.RowCount);
+            // Setup Labels
+            var labelPropertyText = new Label() {
+                Text = a,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Dock = DockStyle.Fill,
+                Tag = tableProperties.RowCount
+            };
+
+            var labelPropertyValue = new Label() {
+                Text = val.ToString(),
+                TextAlign = ContentAlignment.MiddleRight,
+                Dock = DockStyle.Fill,
+                Tag = tableProperties.RowCount
+            };
+
+            // Label Click Callback
+            labelPropertyText.DoubleClick += this.OnPropertyClick;
+            labelPropertyValue.DoubleClick += this.OnPropertyClick;
+
+            // Add Labels
+            tableProperties.Controls.Add(labelPropertyText, 0, tableProperties.RowCount);
+            tableProperties.Controls.Add(labelPropertyValue, 1, tableProperties.RowCount);
 
             // Increment Row Count
             tableProperties.RowCount++;
@@ -163,6 +183,18 @@ namespace project
         {
             var menuItem = sender as MenuItem;
             contextMenuSettings.eventHandler(card, menuItem.Text);
+        }
+
+        public void SetPropertyDblClickCallback(Action<QuartetsCard, int> callback)
+        {
+            propertyCallback = callback;
+        }
+        
+        private void OnPropertyClick(object sender, EventArgs e)
+        {
+            var propertyLabel = sender as Label;
+            if (propertyCallback != null)
+                propertyCallback(card, (int)propertyLabel.Tag);
         }
     }
 }

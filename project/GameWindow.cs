@@ -38,6 +38,9 @@ namespace project
 
                 listCards.Controls.Add(panelCard);
             }
+
+            // Center
+            CenterToScreen();
         }
 
         public void OnCardPicked(QuartetsCard card)

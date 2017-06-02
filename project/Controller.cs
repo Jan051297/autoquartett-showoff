@@ -9,6 +9,8 @@ namespace project
     public class Controller
     {
         public MainWindow mainWindow = null;
+        public GameWindow gameWindow = null;
+
         public QuartetsGameData gameData;
         public QuartetsGameLoader gameLoader;
 
@@ -29,7 +31,8 @@ namespace project
                 return;
 
             // Show Game Window
-            System.Windows.Forms.Application.Run(new GameWindow());
+            gameWindow = new GameWindow();
+            System.Windows.Forms.Application.Run(gameWindow);
         }
 
         public void LoadGame(string path)

@@ -35,6 +35,7 @@ namespace project.QuartetsProperties
 
         // Compare
         // Compares given values and returns result
+        // ! might throw: Make sure given argument went through CheckValueType
         public abstract PropertyResult Compare(object a, object b);
 
         // GetWinningPropertyResult
