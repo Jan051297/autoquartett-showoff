@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,8 +35,14 @@ namespace project
             // Setup Game Data
             QuartetsGameData gameData = new QuartetsGameData();
             gameData.info = json.info;
+
+            gameData.info.path = BasePath;
             gameData.info.filename = name;
 
+            if (gameData.info.imagePath == null)
+                gameData.info.imagePath = name + "/";
+
+            // Deserialize Data beyond info
             if (extensive)
             {
                 // Properties
@@ -77,9 +84,8 @@ namespace project
                 {
                     // Error "Info"
                     QuartetsGameInfo info = new QuartetsGameInfo();
-                    info.name = name + " [Invalid]";
+                    info.name = name +" [Invalid]";
                     info.source = "Error loading JSON:\n" + e.Message;
-                    info.filename = name;
 
                     discoveredGames[index] = info;
                 }
@@ -230,6 +236,16 @@ namespace project
 
                     card.propertyValues[propertyIndex] = cardData[dataIndex];
                     propertyIndex++;
+                }
+
+                // Image
+                try
+                {
+                    var path = gameData.info.path + "/" + gameData.info.imagePath + "/" +
+                        card.name + "." + gameData.info.imageFileExtension;
+                    card.image = Image.FromFile(path);
+                } catch {
+                    // Image is not required, so just ignore Exception
                 }
 
                 // Store

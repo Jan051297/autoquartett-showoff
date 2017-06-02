@@ -11,12 +11,18 @@ using System.Drawing;
 
 namespace project
 {
-    public struct QuartetsGameInfo
+    public class QuartetsGameInfo
     {
-        public string filename;
         public string name;
         public string source;
         public int amountCards;
+
+        public string imagePath;
+        public string imageFileExtension = "png";
+
+        // Not in JSON
+        public string path;
+        public string filename;
     }
 
     public class QuartetsGameData

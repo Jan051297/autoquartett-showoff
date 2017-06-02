@@ -1,7 +1,10 @@
 {
 	"info": {
 		"name": "Codequartett",
-		"source": "www.codequartett.de"
+		"source": "www.codequartett.de",
+		
+		"imagePath": "codequartets/",
+		"imageFileExtension": "jpg"
 	},
 	
 	"properties": [
