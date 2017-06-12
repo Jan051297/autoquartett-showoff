@@ -26,7 +26,7 @@ namespace project
 
             // Card Panel: Context Menu
             QuartetCardPanelContextMenu contextMenu = new QuartetCardPanelContextMenu();
-            contextMenu.options = new string[] { "Left", "Right" };
+            contextMenu.options = new string[] { "Left", "Right", "Edit" };
             contextMenu.eventHandler = this.OnCardContextMenu;
 
             // Add Cards
@@ -76,6 +76,14 @@ namespace project
 
         private void OnCardContextMenu(QuartetsCard card, string option)
         {
+            if(option == "Edit")
+            {
+                var editWindow = new CardEditorWindow(card);
+                editWindow.ShowDialog();
+
+                return;
+            }
+
             if (option == "Left")
                 cardPanelLeft.SetCard(card);
             else if (option == "Right")

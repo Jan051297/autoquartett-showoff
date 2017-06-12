@@ -11,5 +11,10 @@ namespace project.QuartetsProperties
         public NameProperty() : base("NameProperty")
         {
         }
+
+        public override string GetInfoText()
+        {
+            return "Card Name (String/Text)";
+        }
     }
 }

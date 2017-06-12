@@ -22,6 +22,10 @@ namespace project.QuartetsProperties
         // Returns name of Property
         public abstract string GetName();
 
+        // GetInfoText
+        // Returns an informative info Text
+        public abstract string GetInfoText();
+
         // CheckValueType
         // Checks given object's type and converts it, if neccessary
         // Returns null if it cannot be converted

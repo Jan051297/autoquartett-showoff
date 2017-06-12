@@ -20,6 +20,11 @@ namespace project.QuartetsProperties
             return propertyName;
         }
 
+        public override string GetInfoText()
+        {
+            return "String (Text)";
+        }
+
         public override object CheckValueType(object obj)
         {
             try
