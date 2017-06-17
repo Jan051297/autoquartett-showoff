@@ -23,6 +23,12 @@ namespace project
         // Not in JSON
         public string path;
         public string filename;
+
+        // Name Property
+        // since QuartetsGameData does not have a NameProperty, we have
+        // to store the original index of the name property manually
+        // The name of a Card is stored in QuartetsCard
+        public int namePropertyIndex = -1;
     }
 
     public class QuartetsGameData

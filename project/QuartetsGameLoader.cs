@@ -46,10 +46,10 @@ namespace project
             if (extensive)
             {
                 // Properties
-                int propertyNameIndex = DeserializeProperties(ref json, gameData);
+                DeserializeProperties(ref json, gameData);
 
                 // Cards
-                DeserializeCards(ref json, gameData, propertyNameIndex);
+                DeserializeCards(ref json, gameData);
             }
 
             // Amount Cards
@@ -62,9 +62,23 @@ namespace project
         public void Save(string name, QuartetsGameData gameData)
         {
             QuartetsJSON json;
-            json.info = gameData.info;
+            json.cards = null;
+            json.properties = null;
 
-            
+            // JSON Info
+            json.info = gameData.info;
+            var jsonPath = json.info.path + gameData.info.filename + ".json.new";
+            json.info.path = null;     // do not store that info in json
+            json.info.filename = null;
+
+            // Properties
+            SerializeProperties(gameData, ref json);
+
+            // Cards
+            SerializeCards(gameData, ref json);
+
+            // Store
+            File.WriteAllText(jsonPath, JsonConvert.SerializeObject(json));
         }
 
         private QuartetsGameInfo[] discoveredGames = null;
@@ -131,13 +145,12 @@ namespace project
 
         // Read all properties from JSON
         // Returns: index of the Name attribute
-        private int DeserializeProperties(ref QuartetsJSON json, QuartetsGameData gameData)
+        private void DeserializeProperties(ref QuartetsJSON json, QuartetsGameData gameData)
         {
             var propertiesData = json.properties;
 
             // Properties
             // Name Property is not stored
-            int property_index_name = -1;
             gameData.properties = new QuartetsProperties.IProperty[propertiesData.Length - 1];
 
             // Deserialize
@@ -162,7 +175,7 @@ namespace project
                 QuartetsProperties.IProperty property = DeserializeProperty(propertyData[0], propertyData[1], desiredResult);
                 if (property.GetType() == typeof(QuartetsProperties.NameProperty))
                 {
-                    property_index_name = index;
+                    gameData.info.namePropertyIndex = index;
                     continue;
                 }
 
@@ -172,15 +185,33 @@ namespace project
             }
 
             // Require Name Property
-            if (property_index_name < 0)
+            if (gameData.info.namePropertyIndex < 0)
                 throw new InvalidQuartetsJSON("Missing 'name' property!");
-
-            return property_index_name;
         }
 
-        private int SerializeProperties(QuartetsGameData gameData, ref QuartetsJSON json)
+        private void SerializeProperties(QuartetsGameData gameData, ref QuartetsJSON json)
         {
+            json.properties = new string[gameData.properties.Length + 1][];
 
+            for(int index = 0, propertyIndex = 0; index < json.properties.Length; index++)
+            {
+                if (index == gameData.info.namePropertyIndex)
+                {
+                    json.properties[index] = new string[] { "Name", "name" };
+                    continue;
+                }
+
+                var property = gameData.properties[propertyIndex];
+                var propertyTypeString = SerializeProperty(property);
+                var propertyWinnerString = SerializePropertyResult(property.GetWinningPropertyResult());
+
+                if (propertyWinnerString == null)
+                    json.properties[index] = new string[] { property.GetName(), propertyTypeString };
+                else
+                    json.properties[index] = new string[] { property.GetName(), propertyTypeString, propertyWinnerString };
+
+                propertyIndex++;
+            }
         }
 
         private QuartetsProperties.PropertyResult DeserializePropertyResult(string result)
@@ -209,7 +240,7 @@ namespace project
                     return "lower";
 
                 default:
-                    return "invalid";
+                    return null;
             }
         }
 
@@ -246,7 +277,7 @@ namespace project
             throw new InvalidQuartetsJSON("Unsupported type " + property.GetType().ToString());
         }
 
-        private void DeserializeCards(ref QuartetsJSON json, QuartetsGameData gameData, int namePropertyIndex)
+        private void DeserializeCards(ref QuartetsJSON json, QuartetsGameData gameData)
         {
             // Check amount of Cards
             // At least 1 required
@@ -265,7 +296,7 @@ namespace project
 
                 // Card
                 var card = new QuartetsCard();
-                card.name = cardData[namePropertyIndex].ToString();
+                card.name = cardData[gameData.info.namePropertyIndex].ToString();
 
                 // Card Properties
                 // -1 >= propertyValues does not store name, since it's
@@ -274,7 +305,7 @@ namespace project
 
                 for(int dataIndex = 0, propertyIndex = 0; dataIndex < cardData.Length; dataIndex++)
                 {
-                    if (dataIndex == namePropertyIndex)
+                    if (dataIndex == gameData.info.namePropertyIndex)
                         continue;
 
                     // Check/Convert Property Value
@@ -306,7 +337,7 @@ namespace project
             gameData.cards = cards;
         }
 
-        private void SerializeCards(QuartetsGameData gameData, ref QuartetsJSON json, int namePropertyIndex)
+        private void SerializeCards(QuartetsGameData gameData, ref QuartetsJSON json)
         {
             // Cards
             json.cards = new object[gameData.cards.Length][];
@@ -319,7 +350,7 @@ namespace project
                 for (int propertyIndex = 0, dataIndex = 0; propertyIndex < propertyValues.Length; propertyIndex++)
                 {
                     // Store Name
-                    if (dataIndex == namePropertyIndex)
+                    if (propertyIndex == gameData.info.namePropertyIndex)
                     {
                         propertyValues[propertyIndex] = card.name;
                         continue;
