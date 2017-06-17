@@ -108,6 +108,7 @@ namespace project
                     QuartetsGameInfo info = new QuartetsGameInfo();
                     info.name = name +" [Invalid]";
                     info.source = "Error loading JSON:\n" + e.Message;
+                    info.filename = name;
 
                     discoveredGames[index] = info;
                 }
