@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="project.QuartetsProperties.IProperty">
+    <Position X="3.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAQQAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAABAA=</HashCode>
+      <FileName>QuartetsProperties\IProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.Controller">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAQAABAAAAAAAAAABAAAAAAM=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gameLoader" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project.Program">
+    <Position X="11" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="controller" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project.QuartetsCard">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAQAAEAAEAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>QuartetsCard.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gameData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project.QuartetsGameInfo">
+    <Position X="3.25" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAhAAAAAAAIAiAACAAAAAAQEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QuartetsGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.QuartetsGameData" Collapsed="true">
+    <Position X="3.25" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAgAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>QuartetsGame.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="info" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="properties" />
+      <Field Name="cards" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="project.QuartetsGameLoader">
+    <Position X="8.25" Y="3.25" Width="2.25" />
+    <Members>
+      <Field Name="BasePath" Hidden="true" />
+      <Field Name="discoveredGames" Hidden="true" />
+      <Method Name="ReadFromFile" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Struct Name="project.QuartetsGameLoader.QuartetsJSON">
+        <TypeIdentifier>
+          <NewMemberFileName>QuartetsGameLoader.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BAIAiIAAAAAAgQBIAAAIAAAAQABAAAAAAAABAAIAIAA=</HashCode>
+      <FileName>QuartetsGameLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="project.QuartetsProperties.PropertyResult">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEBAAAAAAgACAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>QuartetsProperties\IProperty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
