@@ -53,8 +53,8 @@ namespace project
             {
                 if(obj == null)
                 {
-                    var result = MessageBox.Show("Not all properties have a value! If you press Cancel, any changes will be discarded.", "Card Editor", MessageBoxButtons.OKCancel);
-                    if (result == DialogResult.OK)
+                    var result = MessageBox.Show("Not all properties have a value! If you press OK, any changes will be discarded.", "Card Editor", MessageBoxButtons.OKCancel);
+                    if (result == DialogResult.Cancel || result == DialogResult.Abort)
                         e.Cancel = true;
 
                     break;

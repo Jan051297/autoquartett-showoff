@@ -8,7 +8,7 @@ namespace project.QuartetsProperties
 {
     public class NameProperty : StringProperty
     {
-        public NameProperty() : base("NameProperty")
+        public NameProperty() : base("Card Name")
         {
         }
 

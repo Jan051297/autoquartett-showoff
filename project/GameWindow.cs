@@ -128,6 +128,9 @@ namespace project
                 var editWindowCardName = new QuartetCardPropertyEditor(newCard, -1);
                 editWindowCardName.ShowDialog();
 
+                if (!editWindowCardName.changesMade)
+                    return; // cancel
+
                 // Editor Window
                 var editWindow = new CardEditorWindow(newCard);
                 editWindow.ShowDialog();
