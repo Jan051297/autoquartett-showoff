@@ -36,17 +36,29 @@ namespace project
             var editorWindow = new QuartetCardPropertyEditor(card, propertyIndex);
             editorWindow.ShowDialog();
 
-            // Store Changes (if any)
+            // Apply Changes (if any)
             if (editorWindow.changesMade)
             {
                 changesMade = true;
 
                 // Update Card
                 cardPanel.SetCard(card);
+            }
+        }
 
-                // Store Game Data
-                var gameLoader = Program.controller.gameLoader;
-                gameLoader.Save(Program.controller.gameData);
+        private void OnClosing(object sender, FormClosingEventArgs e)
+        {
+            // Check Card
+            foreach(object obj in card.propertyValues)
+            {
+                if(obj == null)
+                {
+                    var result = MessageBox.Show("Not all properties have a value! If you press Cancel, any changes will be discarded.", "Card Editor", MessageBoxButtons.OKCancel);
+                    if (result == DialogResult.OK)
+                        e.Cancel = true;
+
+                    break;
+                }
             }
         }
     }

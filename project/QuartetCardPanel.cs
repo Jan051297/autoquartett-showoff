@@ -101,6 +101,9 @@ namespace project
                 Tag = tableProperties.RowCount
             };
 
+            if (val == null)
+                val = "[No Value]";
+
             var labelPropertyValue = new Label() {
                 Text = val.ToString(),
                 TextAlign = ContentAlignment.MiddleRight,

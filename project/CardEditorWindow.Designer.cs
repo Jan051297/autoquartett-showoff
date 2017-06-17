@@ -59,6 +59,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "CardEditorWindow";
             this.Text = "Edit Card";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

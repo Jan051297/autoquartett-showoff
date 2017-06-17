@@ -14,6 +14,7 @@ namespace project
     {
         private QuartetsCard card;
         private int propertyIndex;
+        private QuartetsProperties.IProperty property;
         public bool changesMade = false;
 
         public QuartetCardPropertyEditor(QuartetsCard c, int pi)
@@ -24,21 +25,30 @@ namespace project
             // GUI
             InitializeComponent();
 
-            // Setup Labels
-            var property = card.gameData.properties[pi];
+            // Property
+            if(pi == -1)
+            {
+                // Name Property
+                property = new QuartetsProperties.NameProperty();
+            }
+            else
+            {
+                property = card.gameData.properties[pi];
 
+                if(card.propertyValues[propertyIndex] != null)
+                    textBoxValue.Text = card.propertyValues[propertyIndex].ToString();
+            }
+
+            // Setup Labels
             labelPropertyName.Text = property.GetName();
             labelPropertyInfo.Text = property.GetInfoText();
-
-            textBoxValue.Text = card.propertyValues[propertyIndex].ToString();
 
             // Center
             CenterToScreen();
         }
 
         private void OnSaveClick(object sender, EventArgs e)
-        {
-            var property = card.gameData.properties[propertyIndex];
+        {            
             var value = property.ParseValueType(textBoxValue.Text);
 
             if(value == null)
@@ -47,10 +57,18 @@ namespace project
                 return;
             }
 
-            if (value != card.propertyValues[propertyIndex])
+            object currentValue = propertyIndex == -1 ?
+                card.name :
+                card.propertyValues[propertyIndex];
+
+            if (value != currentValue)
             {
                 changesMade = true;
-                card.propertyValues[propertyIndex] = value;
+
+                if (propertyIndex == -1)
+                    card.name = (string)value;
+                else
+                    card.propertyValues[propertyIndex] = value;
             }
 
             Close();
