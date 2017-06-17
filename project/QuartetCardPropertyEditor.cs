@@ -14,6 +14,7 @@ namespace project
     {
         private QuartetsCard card;
         private int propertyIndex;
+        public bool changesMade = false;
 
         public QuartetCardPropertyEditor(QuartetsCard c, int pi)
         {
@@ -42,8 +43,14 @@ namespace project
 
             if(value == null)
             {
-                labelPropertyInfo.Text = "Dum dum give me right type";
+                labelPropertyInfo.Text = "Invalid Text, unable to convert!";
                 return;
+            }
+
+            if (value != card.propertyValues[propertyIndex])
+            {
+                changesMade = true;
+                card.propertyValues[propertyIndex] = value;
             }
 
             Close();

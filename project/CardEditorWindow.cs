@@ -13,6 +13,7 @@ namespace project
     public partial class CardEditorWindow : Form
     {
         private QuartetsCard card;
+        public bool changesMade = false;
 
         public CardEditorWindow(QuartetsCard _card)
         {
@@ -31,8 +32,22 @@ namespace project
 
         private void OnPropertyClick(QuartetsCard _, int propertyIndex)
         {
+            // Editor
             var editorWindow = new QuartetCardPropertyEditor(card, propertyIndex);
             editorWindow.ShowDialog();
+
+            // Store Changes (if any)
+            if (editorWindow.changesMade)
+            {
+                changesMade = true;
+
+                // Update Card
+                cardPanel.SetCard(card);
+
+                // Store Game Data
+                var gameLoader = Program.controller.gameLoader;
+                gameLoader.Save(Program.controller.gameData);
+            }
         }
     }
 }

@@ -74,12 +74,17 @@ namespace project
             }
         }
 
-        private void OnCardContextMenu(QuartetsCard card, string option)
+        private void OnCardContextMenu(QuartetCardPanel cardPanel, string option)
         {
+            var card = cardPanel.GetCard();
+
             if(option == "Edit")
             {
                 var editWindow = new CardEditorWindow(card);
                 editWindow.ShowDialog();
+
+                if (editWindow.changesMade)
+                    cardPanel.SetCard(card);
 
                 return;
             }

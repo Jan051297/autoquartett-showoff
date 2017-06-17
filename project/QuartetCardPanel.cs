@@ -13,7 +13,7 @@ namespace project
     public struct QuartetCardPanelContextMenu
     {
         public string[] options;
-        public Action<QuartetsCard, string> eventHandler;
+        public Action<QuartetCardPanel, string> eventHandler;
     }
 
     public partial class QuartetCardPanel : UserControl
@@ -182,7 +182,7 @@ namespace project
         private void OnContextMenuItemClick(object sender, EventArgs e)
         {
             var menuItem = sender as MenuItem;
-            contextMenuSettings.eventHandler(card, menuItem.Text);
+            contextMenuSettings.eventHandler(this, menuItem.Text);
         }
 
         public void SetPropertyDblClickCallback(Action<QuartetsCard, int> callback)

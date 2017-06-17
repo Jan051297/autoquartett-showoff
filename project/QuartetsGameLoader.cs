@@ -59,7 +59,7 @@ namespace project
             return gameData;
         }
 
-        public void Save(string name, QuartetsGameData gameData)
+        public void Save(QuartetsGameData gameData)
         {
             QuartetsJSON json;
             json.cards = null;
@@ -67,7 +67,7 @@ namespace project
 
             // JSON Info
             json.info = gameData.info;
-            var jsonPath = json.info.path + gameData.info.filename + ".json.new";
+            var jsonPath = json.info.path + gameData.info.filename + ".json";
             json.info.path = null;     // do not store that info in json
             json.info.filename = null;
 
@@ -311,10 +311,10 @@ namespace project
                     // Check/Convert Property Value
                     var property = gameData.properties[propertyIndex];
                     var value = property.CheckValueType(cardData[dataIndex]);
+                    if(value == null)
+                        throw new InvalidQuartetsJSON("Card " + dataIndex + ": Invalid value type for property '" + property.GetName() + "': " + cardData[dataIndex].ToString());
 
-                    card.propertyValues[propertyIndex] = value;// ??
-                        //throw new InvalidQuartetsJSON("Card " + dataIndex + ": Invalid value type for property '" + property.GetName() + "': " + cardData[dataIndex].ToString());
-
+                    card.propertyValues[propertyIndex] = value;
                     propertyIndex++;
                 }
 
