@@ -81,6 +81,9 @@ namespace project
             File.WriteAllText(jsonPath, JsonConvert.SerializeObject(json));
         }
 
+        // DiscoverGames
+        // Searches for json files and parses them for basic information
+        // Discovered Games can be acquired using GetDiscoveredGames
         private QuartetsGameInfo[] discoveredGames = null;
         public void DiscoverGames()
         {
@@ -202,10 +205,12 @@ namespace project
                     continue;
                 }
 
+                // Serialize Property
                 var property = gameData.properties[propertyIndex];
                 var propertyTypeString = SerializeProperty(property);
                 var propertyWinnerString = SerializePropertyResult(property.GetWinningPropertyResult());
 
+                // Store JSON
                 if (propertyWinnerString == null)
                     json.properties[index] = new string[] { property.GetName(), propertyTypeString };
                 else
