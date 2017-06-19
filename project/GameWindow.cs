@@ -82,13 +82,23 @@ namespace project
             {
                 var prop = props[i];
                 var result = prop.Compare(cardLeft.propertyValues[i], cardRight.propertyValues[i]);
-                
-                if (result == QuartetsProperties.PropertyResult.Disabled ||
-                    result == QuartetsProperties.PropertyResult.Invalid)
+                var winningResult = prop.GetWinningPropertyResult();
+
+                if (winningResult == QuartetsProperties.PropertyResult.Disabled ||
+                    winningResult == QuartetsProperties.PropertyResult.Invalid)
                     continue;
 
-                cardPanelLeft.UpdatePropertyColor(i, result, true);
-                cardPanelRight.UpdatePropertyColor(i, result, false);
+                QuartetCardPanel.PropertyVisualResult visualResult = QuartetCardPanel.PropertyVisualResult.None;
+
+                if (result == QuartetsProperties.PropertyResult.Equal)
+                    visualResult = QuartetCardPanel.PropertyVisualResult.Draw;
+                else
+                    visualResult = result == winningResult ?
+                        QuartetCardPanel.PropertyVisualResult.Win :
+                        QuartetCardPanel.PropertyVisualResult.Lose;
+
+                cardPanelLeft.UpdatePropertyColor(i, visualResult, true);
+                cardPanelRight.UpdatePropertyColor(i, visualResult, false);
             }
         }
 

@@ -22,6 +22,14 @@ namespace project
         private QuartetCardPanelContextMenu contextMenuSettings;
         private Action<QuartetsCard, int> propertyCallback = null;
 
+        public enum PropertyVisualResult
+        {
+            None,
+            Win,
+            Lose,
+            Draw
+        }
+
         public QuartetCardPanel()
         {
             InitializeComponent();
@@ -143,20 +151,20 @@ namespace project
         }
 
         // Similar to UpdatePropertyColor, Color is determined based on PropertyResult
-        public void UpdatePropertyColor(int propertyIndex, QuartetsProperties.PropertyResult result, bool win)
+        public void UpdatePropertyColor(int propertyIndex, PropertyVisualResult result, bool win)
         {
             Color color = Color.Black;
 
             // Color fitting PropertyResult
             switch(result)
             {
-                case QuartetsProperties.PropertyResult.Equal:
+                case PropertyVisualResult.Draw:
                     color = Color.Orange;
                     break;
-                case QuartetsProperties.PropertyResult.Higher:
+                case PropertyVisualResult.Win:
                     color = win ? Color.Green : Color.Red;
                     break;
-                case QuartetsProperties.PropertyResult.Lower:
+                case PropertyVisualResult.Lose:
                     color = win ? Color.Red : Color.Green;
                     break;
             }
